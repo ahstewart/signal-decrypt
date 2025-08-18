@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "BPN32QQJWok=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ahste\\Projects\\signal-decrypt\\signal-decrypt\\signal-decrypt.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ahste\\.nuget\\packages\\bouncycastle.cryptography\\2.6.2\\bouncycastle.cryptography.2.6.2.nupkg.sha512",
+    "C:\\Users\\ahste\\.nuget\\packages\\stub.system.data.sqlite.core.netstandard\\1.0.119\\stub.system.data.sqlite.core.netstandard.1.0.119.nupkg.sha512",
+    "C:\\Users\\ahste\\.nuget\\packages\\system.data.sqlite.core\\1.0.119\\system.data.sqlite.core.1.0.119.nupkg.sha512",
+    "C:\\Users\\ahste\\.nuget\\packages\\system.security.cryptography.protecteddata\\9.0.8\\system.security.cryptography.protecteddata.9.0.8.nupkg.sha512",
+    "C:\\Users\\ahste\\.nuget\\packages\\system.text.json\\9.0.8\\system.text.json.9.0.8.nupkg.sha512"
+  ],
+  "logs": []
+}
