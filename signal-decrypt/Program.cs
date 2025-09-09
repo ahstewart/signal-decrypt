@@ -3,18 +3,18 @@ using System.IO;
 using System.Text;
 using System.Text.Json;
 using System.Security.Cryptography;
-using System.Data.SQLite;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Modes;
 using Org.BouncyCastle.Crypto.Parameters;
+using SQLite;
 
 namespace SignalDecryptorCrossPlatform
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             Console.WriteLine("==================================================");
             Console.WriteLine("Signal Desktop Database Decryptor (Cross-Platform)");
@@ -32,7 +32,7 @@ namespace SignalDecryptorCrossPlatform
                 string finalKey = DecryptDbKey(masterKey, wrappedDbKey);
 
                 // Step 4: Export the database
-                ExportDecryptedDatabase(finalKey);
+                await ExportDecryptedDatabase(finalKey);
 
                 Console.WriteLine("\n----------------------------------------");
                 Console.WriteLine("DECRYPTION COMPLETE!");
@@ -198,30 +198,26 @@ namespace SignalDecryptorCrossPlatform
 
             string finalKeyHex = Encoding.UTF8.GetString(decryptedBytes);
             Console.WriteLine("   [SUCCESS] Final database key decrypted.");
-            Console.WriteLine($"   Final Key (Hex): {finalKeyHex}");
-            return $"0x{finalKeyHex}";
+            Console.WriteLine($"   Final Key (Hex): x'{finalKeyHex}'");
+            return $"x'{finalKeyHex}'";
         }
 
-        public static void ExportDecryptedDatabase(string finalKey)
-        {
-            Console.WriteLine("-> Exporting the decrypted database...");
-            string dbPath = Path.Combine(Path.GetDirectoryName(GetSignalConfigPath()), "db.sqlite");
-            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string decryptedDbPath = Path.Combine(desktopPath, "decrypted_database.sqlite");
+public static async Task ExportDecryptedDatabase(string finalKey)
+{
+    string dbPath = Path.Combine(Path.GetDirectoryName(GetSignalConfigPath()), "sql", "db.sqlite");
+    string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+    string decryptedDbPath = Path.Combine(desktopPath, "decrypted_database.sqlite");
+    Console.WriteLine($"-> Decrypting Signal database (located at: {dbPath})...");
 
-            using (var conn = new SQLiteConnection($"Data Source={dbPath}"))
-            {
-                conn.Open();
-                var keyCommand = conn.CreateCommand();
-                keyCommand.CommandText = $"PRAGMA key = \"{finalKey}\";";
-                keyCommand.ExecuteNonQuery();
-
-                var exportCommand = conn.CreateCommand();
-                exportCommand.CommandText = $"ATTACH DATABASE '{decryptedDbPath.Replace('\\', '/')}' AS plaintext KEY ''; SELECT sqlcipher_export('plaintext'); DETACH DATABASE plaintext;";
-                exportCommand.ExecuteNonQuery();
-            }
-            Console.WriteLine("   [SUCCESS] Database exported to your Desktop.");
-        }
+    // The connection string format is slightly different
+    var options = new SQLiteConnectionString(dbPath, true, key: finalKey);
+    var encryptedDb = new SQLiteAsyncConnection(options);
+    long tableCount = await encryptedDb.ExecuteScalarAsync<long>("SELECT count(*) FROM sqlite_master;");
+    Console.WriteLine($"Table count: {tableCount}");
+    string attachPath = decryptedDbPath.Replace('\\', '/');
+    await encryptedDb.ExecuteAsync($"ATTACH DATABASE '{attachPath}' AS plaintext KEY ''; SELECT sqlcipher_export('plaintext'); DETACH DATABASE plaintext;");
+    Console.WriteLine($"   [SUCCESS] Decrypted database exported to your Desktop here: {attachPath}");
+}
 
         #endregion
 
