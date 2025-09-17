@@ -1,0 +1,2 @@
+C:\Users\ahste\Projects\signal-decrypt\signal-decrypt\bin\Release\net9.0\linux-x64\publish\signal-decrypt.pdb
+C:\Users\ahste\Projects\signal-decrypt\signal-decrypt\bin\Release\net9.0\linux-x64\publish\signal-decrypt

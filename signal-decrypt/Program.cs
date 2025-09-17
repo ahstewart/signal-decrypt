@@ -18,9 +18,9 @@ namespace SignalDecryptorCrossPlatform
         static void Main(string[] args)
         {
 
-            Console.WriteLine("==================================================");
-            Console.WriteLine("Signal Desktop Database Decryptor (Cross-Platform)");
-            Console.WriteLine("==================================================");
+            Console.WriteLine("=================================");
+            Console.WriteLine("Signal Desktop Database Decryptor");
+            Console.WriteLine("=================================");
 
             // Prompt user for output path
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
