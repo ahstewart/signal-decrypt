@@ -14,6 +14,10 @@ The SQLitePCLRaw.bundle_sqlcipher package is used to handle the actual database 
 
 Self-contained executables (64-bit) are provided for each of the 3 common operating systems. 
 
-Navigate to /bin/Release/{your_operating_system}/public, download the appropriate file to your machine, and run it. 
+Navigate to 
+
+    signal-decrypt/bin/Release/net9.0/{your_operating_system}/publish
+    
+Download the appropriate file to your machine, and then run it. 
 
 You will be prompted several times for things like desired output path and the name of the decrypted database.
