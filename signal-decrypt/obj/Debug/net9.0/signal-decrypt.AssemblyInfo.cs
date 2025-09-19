@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("signal-decrypt")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ad2522198b14934263acc5de2f0d40b230593682")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e4fa1cb858def4cdf43899ec30fcfa691a1c3890")]
 [assembly: System.Reflection.AssemblyProductAttribute("signal-decrypt")]
 [assembly: System.Reflection.AssemblyTitleAttribute("signal-decrypt")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
