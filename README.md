@@ -1,6 +1,6 @@
 # Database Decryptor for Signal Desktop
 
-This is a simple .NET application designed to decrypt the SQLCipher-encrypted SQLite database file that stores the Signal Desktop message data. It uses the sqlcipher_export() function to output a deencrypted SQLite database file.
+This is a simple .NET application designed to decrypt the SQLCipher-encrypted SQLite database file that stores the Signal Desktop message data. It uses the sqlcipher_export() function to output a decrypted SQLite database file.
 
 The SQLitePCLRaw.bundle_sqlcipher package is used to handle the actual database decrpytion.
 
